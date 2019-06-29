@@ -32,7 +32,8 @@
     var polyline = new BMap.Polyline([
         new BMap.Point(111.460, 40.290),
         new BMap.Point(118.565, 42.160),
-        new BMap.Point(115.442, 33.150)
+        new BMap.Point(115.442, 33.150),
+        new BMap.Point(120.442, 31.150), 
     ], {strokeColor:"red", strokeWeight:5, strokeOpacity:1});
     map.addOverlay(polyline);
     lineList[lineList.length] = polyline;//记录要绘制的线

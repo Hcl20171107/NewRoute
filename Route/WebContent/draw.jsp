@@ -45,6 +45,8 @@
     marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
     map.addOverlay(marker1);               // 将标注添加到地图中
     marker1.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+    map.addOverlay(marker2);               // 将标注添加到地图中
+    marker2.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 
     isFitstLoad = true;//第一次加载
     

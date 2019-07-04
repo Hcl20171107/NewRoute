@@ -37,6 +37,8 @@
     ], {strokeColor:"red", strokeWeight:5, strokeOpacity:1});
     map.addOverlay(polyline);
     lineList[lineList.length] = polyline;//记录要绘制的线
+    polyline++;
+    
     arrowLineList[arrowLineList.length] = addArrow(polyline,10,Math.PI/7);//记录绘制的箭头线
     
     var marker = new BMap.Marker(new BMap.Point(116.405, 39.920));  // 创建标注

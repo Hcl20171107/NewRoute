@@ -12,11 +12,11 @@ import com.drew.metadata.Tag;
 
 
 public class PictureGPS {
-	public static void main(String[] args) throws Exception, Exception{  
+	/*public static void main(String[] args) throws Exception, Exception{  
         File file = new File("C:\\Users\\hp\\Desktop\\images\\赤峰市.jpg"); 
         File file1 = new File("C:\\Users\\hp\\Desktop\\images\\理工楼.jpg");  
         printImageTags(file);
-        //printImageTags(file1);
+        printImageTags(file1);
     } 
 	
 	private static void printImageTags(File file) throws ImageProcessingException, Exception{  
@@ -46,9 +46,9 @@ public class PictureGPS {
         Double miao = Double.parseDouble(point.substring(point.indexOf("'")+1, point.indexOf("\"")).trim());  
         Double duStr = du + fen / 60 + miao / 60 / 60 ;  
         return duStr.toString();  
-    }  
+    } */ 
 
-	/*public ImgInfoBean parseImgInfo(String fileName)
+	public ImgInfoBean parseImgInfo(String fileName)
 	{
 	   File file = new File(fileName);
 	    ImgInfoBean imgInfoBean = null;    
@@ -105,5 +105,5 @@ public class PictureGPS {
 		    Double miao = Double.parseDouble(point.substring(point.indexOf("'")+1, point.indexOf("\"")).trim());
 		    Double duStr = du + fen / 60 + miao / 60 / 60 ;
 		    return duStr.toString();
-		}*/
+		}
 }

@@ -15,12 +15,6 @@
     </head>
     <body>
         <div id="allmap"></div>
-        <div class="span1">
-			<label class="tn-form-label">邮箱：</label> <input class="tn-textbox" name = "email" type="text">
-		</div>
-		<div class="span1">
-			<label class="tn-form-label">密码：</label> <input class="tn-textbox" name = "password" type="password">
-		</div>
     </body>
 </html>
 <script type="text/javascript">
@@ -53,31 +47,13 @@
     lineList[lineList.length] = polyline;//记录要绘制的线
     
     arrowLineList[arrowLineList.length] = addArrow(polyline,10,Math.PI/7);//记录绘制的箭头线
-      // 转换坐标
-    function callback(xyResults){
-    	 var xyResult = null;
-    	 for(var index in xyResults){
-    	  xyResult = xyResults[index];
-    	  if(xyResult.error != 0){continue;}//出错就直接返回;
-    	  var point = new BMap.Point(xyResult.x, xyResult.y);
-    	     var marker = new BMap.Marker(point);
-    	     map.addOverlay(marker);
-    	     map.setCenter(point);// 由于写了这句，每一个被设置的点都是中心点的过程
-    	    }
-    	}
-
-    	setTimeout(function(){
-    	    BMap.Convertor.transMore(points,2,callback);        //一秒之后开始进行坐标转换。参数2，表示是从GCJ-02坐标到百度坐标。参数0，表示是从GPS到百度坐标
-    	}, 1000);
-    
-    	
-    	
+  
     var marker = new BMap.Marker(new BMap.Point(111.460, 40.290));  // 创建标注
     var marker1 = new BMap.Marker(new BMap.Point(120.442, 31.150));
     map.addOverlay(marker);               // 将标注添加到地图中
-    marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+    marker.setAnimation(BMAP_ANIMATION_BOUNCE); // 跳动的动画
     map.addOverlay(marker1);               // 将标注添加到地图中
-    marker1.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+    marker1.setAnimation(BMAP_ANIMATION_BOUNCE); // 跳动的动画
     
     isFitstLoad = true;//第一次加载
     

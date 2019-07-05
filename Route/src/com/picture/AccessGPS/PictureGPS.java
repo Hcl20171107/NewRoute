@@ -13,10 +13,10 @@ import com.drew.metadata.Tag;
 
 public class PictureGPS {
 	public static void main(String[] args) throws Exception, Exception{  
-        File file = new File("C:\\Users\\hp\\Desktop\\张阳阳.jpg"); 
-        File file1 = new File("C:\\Users\\hp\\Desktop\\1.jpg");  
+        File file = new File("C:\\Users\\hp\\Desktop\\images\\赤峰市.jpg"); 
+        File file1 = new File("C:\\Users\\hp\\Desktop\\images\\理工楼.jpg");  
         printImageTags(file);
-        printImageTags(file1);
+        //printImageTags(file1);
     } 
 	
 	private static void printImageTags(File file) throws ImageProcessingException, Exception{  

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.lang.Math"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,44 +11,74 @@
             #r-result{height:100%;width:20%;float:left;}
         </style>
         <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
-        <title>绘制带有箭头的折线</title>
+        <title>绘制轨迹</title>
     </head>
     <body>
         <div id="allmap"></div>
+        <div class="span1">
+			<label class="tn-form-label">邮箱：</label> <input class="tn-textbox" name = "email" type="text">
+		</div>
+		<div class="span1">
+			<label class="tn-form-label">密码：</label> <input class="tn-textbox" name = "password" type="password">
+		</div>
     </body>
 </html>
 <script type="text/javascript">
     var map = new BMap.Map("allmap");
     var point = new BMap.Point(111.460, 40.290);
-    map.centerAndZoom(point, 15);
-    map.addControl(new BMap.NavigationControl());
-    map.enableScrollWheelZoom();
+    map.centerAndZoom(point, 15); //初始化地图
+    map.addControl(new BMap.NavigationControl()); //平移缩放控件
+    map.enableScrollWheelZoom();  //滚轮缩放大小
 
 
     var lineList = new Array();//记录要绘制的线
     var arrowLineList = new Array();//记录绘制的箭头线
     var isFirstLoad = false;//是否是第一次加载，第一次加载不触发清除事件
     var arrowLineLengthRate = 15 / 10;
-
-    var polyline = new BMap.Polyline([
-        new BMap.Point(111.460, 40.290),
-        new BMap.Point(118.565, 42.160),
-        new BMap.Point(115.442, 33.150),
-        new BMap.Point(120.442, 31.150), 
-    ], {strokeColor:"red", strokeWeight:5, strokeOpacity:1});
+    
+    map.addEventListener("click",function(e){
+        alert(e.point.lng + "," + e.point.lat);
+    });
+    
+    var polyline = new BMap.Polyline(
+    	[
+    		new BMap.Point(111.460, 40.290),
+		    new BMap.Point(118.565, 42.160),
+		    new BMap.Point(115.442, 33.150),
+		    new BMap.Point(120.442, 31.150), 
+       	], 
+    	{strokeColor:"red", strokeWeight:5, strokeOpacity:1 } //Opacity 透明度
+    );
     map.addOverlay(polyline);
     lineList[lineList.length] = polyline;//记录要绘制的线
     
     arrowLineList[arrowLineList.length] = addArrow(polyline,10,Math.PI/7);//记录绘制的箭头线
+      // 转换坐标
+    function callback(xyResults){
+    	 var xyResult = null;
+    	 for(var index in xyResults){
+    	  xyResult = xyResults[index];
+    	  if(xyResult.error != 0){continue;}//出错就直接返回;
+    	  var point = new BMap.Point(xyResult.x, xyResult.y);
+    	     var marker = new BMap.Marker(point);
+    	     map.addOverlay(marker);
+    	     map.setCenter(point);// 由于写了这句，每一个被设置的点都是中心点的过程
+    	    }
+    	}
+
+    	setTimeout(function(){
+    	    BMap.Convertor.transMore(points,2,callback);        //一秒之后开始进行坐标转换。参数2，表示是从GCJ-02坐标到百度坐标。参数0，表示是从GPS到百度坐标
+    	}, 1000);
     
-    var marker = new BMap.Marker(new BMap.Point(116.405, 39.920));  // 创建标注
+    	
+    	
+    var marker = new BMap.Marker(new BMap.Point(111.460, 40.290));  // 创建标注
+    var marker1 = new BMap.Marker(new BMap.Point(120.442, 31.150));
     map.addOverlay(marker);               // 将标注添加到地图中
     marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
     map.addOverlay(marker1);               // 将标注添加到地图中
     marker1.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-    map.addOverlay(marker2);               // 将标注添加到地图中
-    marker2.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-
+    
     isFitstLoad = true;//第一次加载
     
     /**
@@ -133,7 +164,7 @@
             arrowLineList.length = 0;
             //重新绘制箭头线
             for(var i=0; i<lineList.length; i++){
-                arrowLineList[arrowLineList.length] = addArrow(lineList[i],15 / arrowLineLengthRate,Math.PI / 7);//记录绘制的箭头线
+                arrowLineList[arrowLineList.length] = addArrow(lineList[i],15 / arrowLineLengthRate,Math.PI / 7); //记录绘制的箭头线
             }
         }
         isFirstLoad = false;

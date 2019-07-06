@@ -10,16 +10,15 @@ import java.util.Date;
 import com.picture.util.DBUtil;
 
 public class MapDAO {
-	public void save(String latitude, String longtitude) {
+
+	public int join(Float latitude, Float longtitude) {
 		String sql = "insert into coordinate(latitude,longtitude) values(?,?)";
-		
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement pstmt = null;
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, latitude);
-			pstmt.setString(2, longtitude);
+			pstmt.setFloat(1, latitude);
+			pstmt.setFloat(2, longtitude);
 		
 			pstmt.executeUpdate();
 		}catch (SQLException e) {
@@ -27,6 +26,7 @@ public class MapDAO {
 		}finally {
 			DBUtil.closeJDBC(null, pstmt, conn);
 		}
-		
+		return 1;
 	}
+
 }
